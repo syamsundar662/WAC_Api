@@ -17,6 +17,10 @@ class HomeScreen extends StatelessWidget {
 
   const HomeScreen({super.key});
 
+  Future<void> _refreshData(BuildContext context) async {
+    await context.read<HomeViewModel>().fetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
     size(context);
@@ -66,7 +70,8 @@ class HomeScreen extends StatelessWidget {
                 } else {
                   if (data.item3) {
                     // Showing cached data when offline
-                    return Expanded(
+                    return RefreshIndicator(
+                      onRefresh: () => _refreshData(context),
                       child: ListView.builder(
                         itemCount: data.item1.length,
                         itemBuilder: (context, index) {
@@ -75,11 +80,14 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return ListView.builder(
-                      itemCount: data.item1.length,
-                      itemBuilder: (context, index) {
-                        return data.item1[index];
-                      },
+                    return RefreshIndicator(
+                      onRefresh: () => _refreshData(context),
+                      child: ListView.builder(
+                        itemCount: data.item1.length,
+                        itemBuilder: (context, index) {
+                          return data.item1[index];
+                        },
+                      ),
                     );
                   }
                 }
