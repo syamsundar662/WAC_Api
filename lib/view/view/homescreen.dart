@@ -16,36 +16,37 @@ class HomeScreen extends StatelessWidget {
     Text('Account Page'),
   ];
 
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 147, 200, 72),
-        leading: Icon(Icons.shopping_cart_outlined),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications_active_outlined),
-            onPressed: () {},
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: AppBar(
+          backgroundColor: Color.fromARGB(255, 147, 200, 72),
+          leading: Icon(Icons.shopping_cart_outlined),
+          title: TextField(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              suffixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none,
+              ),
+            ),
           ),
-        ],
-        // bottom: PreferredSize(
-        //   preferredSize: Size.fromHeight(50.0),
-        //   child: Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: TextField(
-        //       decoration: InputDecoration(
-        //         hintText: 'Search',
-        //         filled: true,
-        //         fillColor: Colors.white,
-        //         prefixIcon: Icon(Icons.search),
-        //         border: OutlineInputBorder(
-        //           borderRadius: BorderRadius.circular(30),
-        //           borderSide: BorderSide.none,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.notifications_active_outlined,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
       body: Selector<HomeViewModel, int>(
         selector: (_, viewModel) => viewModel.selectedIndex,
@@ -80,6 +81,7 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       bottomNavigationBar: Selector<HomeViewModel, int>(
+        
         selector: (_, viewModel) => viewModel.selectedIndex,
         builder: (context, selectedIndex, child) {
           return BottomNavigationBar(
@@ -95,6 +97,7 @@ class HomeScreen extends StatelessWidget {
                   icon: Icon(Icons.account_circle), label: 'Account'),
             ],
             currentIndex: selectedIndex,
+            unselectedItemColor: Colors.grey[400],
             selectedItemColor: Colors.green,
             onTap: (index) {
               context.read<HomeViewModel>().setSelectedIndex(index);

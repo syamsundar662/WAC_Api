@@ -5,21 +5,18 @@ import 'package:web_and_craft/model/model.dart';
 class BannerSliderWidget extends StatelessWidget {
   final List<Content> contents;
 
-  BannerSliderWidget(this.contents);
+  const BannerSliderWidget(this.contents, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.0,
+      height: 160,
       child: PageView(
         children: contents.map((content) {
           print('${content.imageUrl}---------------');
           return CachedNetworkImage(
-            
+            fit: BoxFit.fill,
             imageUrl: content.imageUrl!,
-            width: 10,
-            height: 10,
-            fit: BoxFit.cover,
             placeholder: (context, url) => CircularProgressIndicator(),
             errorWidget: (context, url, error) => Icon(Icons.error),
           );
