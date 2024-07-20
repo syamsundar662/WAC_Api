@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:web_and_craft/model/model.dart';
+import 'package:web_and_craft/utils/constants.dart';
 
 class CategoryWidget extends StatelessWidget {
   final List<Content> categories;
@@ -13,20 +15,22 @@ class CategoryWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 8,right: 8),
+          padding: const EdgeInsets.only(left: 12, right: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Categories',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            
+                  style:
+                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500)),
               Text('View all',
-                  style: TextStyle(fontSize: 14,)),
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                  )),
             ],
           ),
         ),
         SizedBox(
-          height: 120,
+          height: screenFullHeight * .12,
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
@@ -53,27 +57,26 @@ class CategoryItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            // child:   const SizedBox(height: 8),
-                 child: Column(
-           children: [
-             SizedBox(
-              height: 60,
-              width: 60,
-              child: CachedNetworkImage(imageUrl: category.imageUrl!,)),
-             Text(category.title!, style: const TextStyle(fontSize: 12)),
-           ],
-                 ),
-            width: 90,
-            height: 90,
+            width: screenFullWidth * .212,
+            height: screenFullHeight * .1,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(width: .5,color: Colors.grey)
-              
-              ),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(width: .5, color: Colors.grey)),
+            // child:   const SizedBox(height: 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                    height: screenFullHeight * .06,
+                    width: screenFullWidth * .12,
+                    child: CachedNetworkImage(
+                      imageUrl: category.imageUrl!,
+                    )),
+                Text(category.title!, style: TextStyle(fontSize: 10.sp)),
+              ],
             ),
+          ),
         ),
-        
-      
       ],
     );
   }

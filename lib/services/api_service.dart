@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:web_and_craft/model/model.dart';
+import 'package:web_and_craft/utils/constants.dart';
 
 class ApiService {
-  static const String url = 'https://64bfc2a60d8e251fd111630f.mockapi.io/api/Todo';
-
   Future<List<Model>> fetchData() async {
     try {
       final response = await http.get(Uri.parse(url));
@@ -15,9 +14,8 @@ class ApiService {
         throw Exception('Failed to load data');
       }
     } catch (e) {
-      print(e);
+      // print(e);
       rethrow;
     }
   }
 }
-

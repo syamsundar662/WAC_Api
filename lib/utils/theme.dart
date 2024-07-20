@@ -9,7 +9,7 @@ ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: Colors.black,
     colorScheme: const ColorScheme.light().copyWith(
-        background: Colors.white,
+        surface: Colors.white,
         primary: const Color.fromARGB(75, 179, 179, 179),
         secondary: Colors.grey,
         onPrimary: Colors.black,

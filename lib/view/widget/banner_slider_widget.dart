@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:web_and_craft/model/model.dart';
+import 'package:web_and_craft/utils/constants.dart';
 
 class BannerSliderWidget extends StatelessWidget {
   final List<Content> contents;
@@ -10,13 +11,14 @@ class BannerSliderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: screenFullHeight*.17,
       child: PageView(
         children: contents.map((content) {
           return CachedNetworkImage(
             fit: BoxFit.fill,
             imageUrl: content.imageUrl!,
-            placeholder: (context, url) => const CircularProgressIndicator(),
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
             errorWidget: (context, url, error) => const Icon(Icons.error),
           );
         }).toList(),

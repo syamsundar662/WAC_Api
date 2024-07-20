@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String url = 'https://64bfc2a60d8e251fd111630f.mockapi.io/api/Todo';
+
 late double screenFullWidth;
 late double screenFullHeight;
 void size(BuildContext context) {

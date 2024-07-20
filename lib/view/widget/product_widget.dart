@@ -1,41 +1,41 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart'; // Import the rating stars package
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:web_and_craft/model/model.dart';
 import 'package:web_and_craft/utils/constants.dart';
 
 class ProductWidget extends StatelessWidget {
   final List<Content> products;
-
-  const ProductWidget(this.products, {super.key});
+  final String title;
+  const ProductWidget(this.products, {super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 8.0,right: 8.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 12, right: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Most Popular',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                title,
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
               ),
               Text('View all',
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 12.sp,
                   )),
             ],
           ),
         ),
         SizedBox(
-          height: 250, // Adjust the height as needed
+          height: screenFullHeight * .28, // Adjust the height as needed
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: products.length,
-            padding: const EdgeInsets.all(0),
             itemBuilder: (context, index) {
               return ProductItem(products[index]);
             },
@@ -53,14 +53,14 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(product.offerPrice);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: 150, // Adjust the width as needed
+        width: screenFullWidth * .360, // Adjust the width as needed
         child: Container(
           decoration: BoxDecoration(
-                border: Border.all(width: .5,color: Colors.grey),borderRadius: BorderRadius.circular(10)),
+              border: Border.all(width: .5, color: Colors.grey),
+              borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -69,7 +69,7 @@ class ProductItem extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: CachedNetworkImage(
-                    height: 100,
+                    height: 85.w,
                     imageUrl: product.productImage!,
                     // fit: BoxFit.cover,
                   ),
@@ -84,29 +84,50 @@ class ProductItem extends StatelessWidget {
                       padding: const EdgeInsets.all(6.0),
                       child: Text(
                         'Sales${product.discount!}',
-                        style: const TextStyle(fontSize: 12, color: Colors.black),
+                        style: TextStyle(fontSize: 10.sp, color: Colors.black),
                       ),
                     ),
                   ),
+                kHeight10,
                 Text(
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
                   product.productName!,
                   style:
-                      const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+                      TextStyle(fontSize: 8.5.sp, fontWeight: FontWeight.w400),
                 ),
-                const Spacer(),
+                // const Spacer(),
+                RatingStars(
+                  value: product.productRating?.toDouble() ?? 0.0,
+                  onValueChanged: (v) {},
+                  starBuilder: (index, color) => Icon(
+                    Icons.star,
+                    color: color,
+                    size: 12.sp,
+                  ),
+                  maxValue: 5,
+                  starSpacing: .5,
+                  maxValueVisibility: true,
+                  valueLabelVisibility: false,
+                  starOffColor: const Color(0xffe7e8ea),
+                  starColor: Colors.orangeAccent,
+                ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.offerPrice!,
-                      style: const TextStyle(
-                          color: Colors.red, fontWeight: FontWeight.bold),
+                      product.offerPrice!.replaceAll('â¹', "₹ "),
+                      style: TextStyle(color: Colors.black, fontSize: 10.sp),
                     ),
+                    kWidth10,
                     if (product.actualPrice != product.offerPrice)
                       Text(
-                        product.actualPrice!,
-                        style: const TextStyle(
-                            decoration: TextDecoration.lineThrough),
+                        product.actualPrice!.replaceAll('â¹', "₹ "),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 10.sp,
+                          decoration: TextDecoration.lineThrough,
+                        ),
                       ),
                   ],
                 ),
