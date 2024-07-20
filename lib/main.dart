@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: ScreenUtilInit(
         child: MaterialApp(
+          showSemanticsDebugger: false,
           title: 'Machine Test',
           theme: lightTheme,
           home: const HomeScreen(),
