@@ -5,28 +5,40 @@ import 'package:web_and_craft/model/model.dart';
 class CategoryWidget extends StatelessWidget {
   final List<Content> categories;
 
-  CategoryWidget(this.categories);
+  const CategoryWidget(this.categories, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text('Categories', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        ),
-        Container(
-          height: 120,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              return CategoryItem(categories[index]);
-            },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Categories',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              
+                Text('View all',
+                    style: TextStyle(fontSize: 14,)),
+              ],
+            ),
           ),
-        ),
-      ],
+          SizedBox(
+            height: 120,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                return CategoryItem(categories[index]);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -34,7 +46,7 @@ class CategoryWidget extends StatelessWidget {
 class CategoryItem extends StatelessWidget {
   final Content category;
 
-  CategoryItem(this.category);
+  const CategoryItem(this.category, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,18 +55,26 @@ class CategoryItem extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 60,
-            height: 60,
+            // child:   const SizedBox(height: 8),
+         child: Column(
+           children: [
+             SizedBox(
+              height: 60,
+              width: 60,
+              child: CachedNetworkImage(imageUrl: category.imageUrl!,)),
+             Text(category.title!, style: const TextStyle(fontSize: 12)),
+           ],
+         ),
+            width: 85,
+            height: 85,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: CachedNetworkImageProvider( category.imageUrl! ),
-                fit: BoxFit.cover,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(width: .5,color: Colors.grey)
+              
               ),
             ),
-          ),
-          SizedBox(height: 8),
-          Text(category.title!, style: TextStyle(fontSize: 12)),
+          
+        
         ],
       ),
     );

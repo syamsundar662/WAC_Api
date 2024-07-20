@@ -1,36 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'package:web_and_craft/model/model.dart';
-// import 'package:web_and_craft/services/api_service.dart';
-
-// class HomeViewModel extends ChangeNotifier {
-//   List<Welcome> _data = [];
-//   int _selectedIndex = 0;
-//   final ApiService _apiService;
-
-//   List<Welcome> get data => _data;
-//   int get selectedIndex => _selectedIndex;
-
-//   HomeViewModel(this._apiService) {
-//     fetchData();
-//   }
-
-//   void setSelectedIndex(int index) {
-//     _selectedIndex = index;
-//     notifyListeners();
-//   }
-
-//   Future<void> fetchData() async {
-//     try {
-//       _data = await _apiService.fetchData();
-//       notifyListeners();
-//     } catch (e) {
-//       print(e);
-//     }
-//   }
-// }
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:web_and_craft/model/model.dart';
 import 'package:web_and_craft/services/api_service.dart';

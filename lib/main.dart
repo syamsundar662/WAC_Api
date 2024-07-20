@@ -38,6 +38,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_and_craft/services/api_service.dart';
+import 'package:web_and_craft/utils/theme.dart';
 import 'package:web_and_craft/view%20model/home_viewmodel.dart';
 import 'package:web_and_craft/view/view/homescreen.dart';
 
@@ -57,9 +58,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Machine Test',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-        ),
+        theme:lightTheme, 
         home: HomeScreen(),
       ),
     );

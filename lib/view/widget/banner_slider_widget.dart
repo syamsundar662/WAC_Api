@@ -13,12 +13,11 @@ class BannerSliderWidget extends StatelessWidget {
       height: 160,
       child: PageView(
         children: contents.map((content) {
-          print('${content.imageUrl}---------------');
           return CachedNetworkImage(
             fit: BoxFit.fill,
             imageUrl: content.imageUrl!,
-            placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+            placeholder: (context, url) => const CircularProgressIndicator(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           );
         }).toList(),
       ),
