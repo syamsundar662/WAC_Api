@@ -93,6 +93,39 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> loadDataFromDatabase() async {
     try {
       _data = await _dbHelper.fetchData();
+      homePageWidgets = <Widget>[];
+      for (var item in _data) {
+        switch (item.type) {
+          case "banner_slider":
+            final contents = item.contents;
+            if ((contents ?? []).isNotEmpty) {
+              homePageWidgets.add(BannerSliderWidget(contents ?? []));
+            }
+            continue;
+          case "products":
+            final contents = item.contents;
+            if ((contents ?? []).isNotEmpty) {
+              homePageWidgets.add(ProductWidget(
+                contents ?? [],
+                title: item.title,
+              ));
+            }
+            continue;
+          case "banner_single":
+            final imageUrl = item.imageUrl;
+            if (imageUrl != null) {
+              homePageWidgets.add(SingleBannerWidget(imageUrl));
+            }
+            continue;
+          case "catagories":
+            final contents = item.contents;
+            if ((contents ?? []).isNotEmpty) {
+              homePageWidgets.add(CategoryWidget(contents ?? []));
+            }
+            continue;
+          default:
+        }
+      }
       notifyListeners();
     } catch (e) {
       log('Error loading data from database: $e');
