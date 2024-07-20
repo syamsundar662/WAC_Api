@@ -50,7 +50,7 @@ class DatabaseHelper {
     final List<Map<String, dynamic>> maps = await db.query('data');
 
     if (maps.isNotEmpty) {
-      return welcomeFromJson(maps.first['json']);
+      return FromJson(maps.first['json']);
     } else {
       return [];
     }
