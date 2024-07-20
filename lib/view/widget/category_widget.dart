@@ -9,36 +9,34 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Categories',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              
-                Text('View all',
-                    style: TextStyle(fontSize: 14,)),
-              ],
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 8,right: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Categories',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            
+              Text('View all',
+                  style: TextStyle(fontSize: 14,)),
+            ],
           ),
-          SizedBox(
-            height: 120,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                return CategoryItem(categories[index]);
-              },
-            ),
+        ),
+        SizedBox(
+          height: 120,
+          child: ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              return CategoryItem(categories[index]);
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -50,13 +48,13 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Container(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
             // child:   const SizedBox(height: 8),
-         child: Column(
+                 child: Column(
            children: [
              SizedBox(
               height: 60,
@@ -64,19 +62,19 @@ class CategoryItem extends StatelessWidget {
               child: CachedNetworkImage(imageUrl: category.imageUrl!,)),
              Text(category.title!, style: const TextStyle(fontSize: 12)),
            ],
-         ),
-            width: 85,
-            height: 85,
+                 ),
+            width: 90,
+            height: 90,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(width: .5,color: Colors.grey)
               
               ),
             ),
-          
+        ),
         
-        ],
-      ),
+      
+      ],
     );
   }
 }

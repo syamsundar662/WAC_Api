@@ -11,7 +11,7 @@ class SingleBannerWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-          height: 170,
+          height: 160,
           width: double.infinity,
           child:ClipRRect(
             borderRadius: BorderRadius.circular(10),
